@@ -110,6 +110,17 @@ ul {
 }
 
 /*header-***********************/
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 32px;
+
+
+
+}
+
 .header-container {
     display: flex;
     align-items: center;
@@ -156,7 +167,9 @@ ul {
 .link {
     color: var(--color-primary-light);
     text-decoration: none;
+
     line-height: 1.5;
+    transition: color 0.5s;
 }
 
 .link:hover {
@@ -167,8 +180,10 @@ ul {
 
 .hero-section {
     padding: 272px 0;
-    background: url("../images/couple-coffee-in-bakery.jpg") no-repeat center top;
+    background: no-repeat center top;
+    background-image: linear-gradient(102.76deg, rgba(18, 18, 17, 0.78) 2.03%, rgba(18, 18, 17, 0.6) 58.46%, rgba(18, 18, 17, 0) 90.36%), url("../images/couple-coffee-in-bakery.jpg");
     background-size: cover;
+
 }
 
 .hero-title {
@@ -255,8 +270,9 @@ ul {
 /************* Chefs Section ********************************/
 .chefs-list {
     display: flex;
-    gap: 30px;
-
+    column-gap: 30px;
+    row-gap: 40px;
+    flex-wrap: wrap;
 }
 
 .chefs-items {
@@ -264,8 +280,9 @@ ul {
 }
 
 .chefs-title {
-    max-width: 520px;
+
     margin: 0 auto 80px;
+    position: relative;
 }
 
 .chef-photo {
@@ -274,18 +291,30 @@ ul {
     background-color: var(--color-primary-light);
 }
 
-.chefs-title::after,
-.chefs-title::before {
-    content: "";
-    border: 2px solid var(--color-brand-light);
-    width: 352px;
-    display: block;
-}
-
 .chef-title {
     font-size: 40px;
     font-weight: 600;
     margin-bottom: 16px;
+    position: relative;
+}
+
+.chefs-title::after,
+.chefs-title::before {
+    position: absolute;
+    bottom: 24px;
+    content: "";
+    border: 2px solid var(--color-brand-light);
+    width: 352px;
+
+}
+
+.chefs-title::before {
+    left: 0;
+
+}
+
+.chefs-title::after {
+    right: 0;
 }
 
 .chefs-card {
@@ -332,7 +361,11 @@ ul {
     border-radius: 16px;
     background: linear-gradient(180deg, rgba(49, 38, 26, 0) 55.21%, rgba(49, 38, 26, 0.71) 72.92%, #31261A 100%);
     height: 444px;
+    transition: transform 0.5s;
+}
 
+.format-cart:hover {
+    transform: scale(1.05);
 }
 
 .formats-title {
@@ -371,6 +404,10 @@ ul {
     background-color: var(--color-primary-dark);
 }
 
+.carosel-button.next {
+    transform: rotate(180deg);
+}
+
 .carosel-button:hover .carosel-arrow {
     fill: var(--color-primary-light);
 }
@@ -395,9 +432,41 @@ ul {
     margin-bottom: 16px;
 }
 
+.font-size {
+    font-size: 18px;
+}
+
 /***************** Footer Section *************************/
 .footer {
     padding: 32px 0;
+    background-image: url('../images/footer-img.png');
+    background-color: var(--color-primary-dark);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+}
+
+.footer::before,
+.footer::after {
+    content: "";
+    position: absolute;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    bottom: 0;
+}
+
+.footer::before {
+    background-image: url(../images/bread-small.png);
+    width: 180px;
+    height: 120px;
+}
+
+.footer::after {
+    background-image: url(../images/bread-larg.png);
+    right: 0;
+    width: 380px;
+    height: 190px;
 }
 
 .footer-container {
@@ -444,14 +513,96 @@ ul {
     font-size: 14px;
 }
 
-.footer {
-    background-image: url('../images/footer-img.png');
-    background-color: var(--color-primary-dark);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-
-
+/************* Modal  ******************************************/
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #31261A66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    transition: opacity 0.5s, visibility 0.5s;
 }
 
-/* урок 11  14:07*/
+.backdrop.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal {
+    width: 100%;
+    max-width: 880px;
+    max-height: 880px;
+    height: 100%;
+    background-color: var(--color-primary-light);
+    position: relative;
+    padding: 128px;
+    border-radius: 32px;
+}
+
+
+
+.modal-btn-close {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
+/*form*/
+.form-field {
+    margin-bottom: 32px;
+}
+
+.form-label {
+    display: block;
+}
+
+.form-input {
+    padding: 16px 42px;
+    border: 1px solid var(--color-secondary-dark);
+    width: 100%;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.form-input:focus {
+    border-color: var(--color-brand-normal);
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: var(--color-secondary-dark);
+}
+
+.form-input:focus::placeholder {
+    color: var(--color-primary-dark);
+}
+
+.form-button {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 24px;
+}
+
+.form-terms {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.25;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    max-width: 213px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.form-terms-link {
+    color: var(--color-primary-dark);
+    text-underline-offset: 2px;
+}
+
+/* урок 16  61:07*/
